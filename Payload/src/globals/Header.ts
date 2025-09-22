@@ -8,21 +8,23 @@ const Header: GlobalConfig = {
       name: 'logo',
       type: 'upload',
       relationTo: 'media',
-
-      
     },
     {
       name: 'menu',
       type: 'array',
       fields: [
         { name: 'label', type: 'text', required: true },
-        { name: 'url', type: 'text', required: false },
+        { name: 'url', type: 'text', required: true },
       ],
-    },
-  ],
+    },{name: 'Contactanos',
+      type: 'array',
+      fields: [
+        { name: 'Text', type: 'text', required: true },
+        { name: 'url', type: 'text', required: true },
+        { name: "logo", type: 'upload',relationTo: 'media' }, 
+    ]}],
   access:{
     read: (): boolean => true
   },
 }
-
 export default Header

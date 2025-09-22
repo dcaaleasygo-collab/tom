@@ -301,7 +301,15 @@ export interface Header {
   menu?:
     | {
         label: string;
-        url?: string | null;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  Contactanos?:
+    | {
+        Text: string;
+        url: string;
+        logo?: (string | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -315,16 +323,18 @@ export interface Header {
 export interface Footer {
   id: string;
   logo: string | Media;
-  address: string;
-  phone: string;
-  privacyPolicy?: {
-    label?: string | null;
-    url?: string | null;
-  };
+  footerSections?:
+    | {
+        logo?: (string | null) | Media;
+        content?: string | null;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   socials?:
     | {
-        icon?: ('facebook' | 'instagram' | 'linkedin' | 'twitter') | null;
-        url: string;
+        url?: string | null;
+        logo?: (string | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -344,6 +354,14 @@ export interface HeaderSelect<T extends boolean = true> {
         url?: T;
         id?: T;
       };
+  Contactanos?:
+    | T
+    | {
+        Text?: T;
+        url?: T;
+        logo?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -354,19 +372,19 @@ export interface HeaderSelect<T extends boolean = true> {
  */
 export interface FooterSelect<T extends boolean = true> {
   logo?: T;
-  address?: T;
-  phone?: T;
-  privacyPolicy?:
+  footerSections?:
     | T
     | {
-        label?: T;
+        logo?: T;
+        content?: T;
         url?: T;
+        id?: T;
       };
   socials?:
     | T
     | {
-        icon?: T;
         url?: T;
+        logo?: T;
         id?: T;
       };
   updatedAt?: T;
