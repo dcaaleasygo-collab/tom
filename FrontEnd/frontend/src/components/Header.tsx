@@ -33,9 +33,8 @@ export function Header() {
   </a>
 </div>
 
-
         <nav>
-          <ul className="nav-menu">
+          <ul className="header-nav">
             {header.menu.map((item, idx) => (
               <li key={idx}>
                 <a href={item.url}>{item.label}</a>
