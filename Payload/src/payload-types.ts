@@ -86,9 +86,11 @@ export interface Config {
   };
   globals: {
     header: Header;
+    footer: Footer;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
   user: User & {
@@ -295,11 +297,34 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
-  logo: string | Media;
+  logo?: (string | null) | Media;
   menu?:
     | {
         label: string;
         url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  logo: string | Media;
+  address: string;
+  phone: string;
+  privacyPolicy?: {
+    label?: string | null;
+    url?: string | null;
+  };
+  socials?:
+    | {
+        icon?: ('facebook' | 'instagram' | 'linkedin' | 'twitter') | null;
+        url: string;
         id?: string | null;
       }[]
     | null;
@@ -316,6 +341,31 @@ export interface HeaderSelect<T extends boolean = true> {
     | T
     | {
         label?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  logo?: T;
+  address?: T;
+  phone?: T;
+  privacyPolicy?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  socials?:
+    | T
+    | {
+        icon?: T;
         url?: T;
         id?: T;
       };
