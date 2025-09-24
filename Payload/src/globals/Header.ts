@@ -16,12 +16,12 @@ const Header: GlobalConfig = {
         { name: 'label', type: 'text', required: true },
         { name: 'url', type: 'text', required: true },
       ],
-    },{name: 'Contactanos',
-      type: 'array',
+    },{name: 'Boton-Derecho',
+      type: 'group',
       fields: [
         { name: 'Text', type: 'text', required: true },
         { name: 'url', type: 'text', required: true },
-        { name: "logo", type: 'upload',relationTo: 'media' }, 
+        { name: "logo_", type: 'upload',relationTo: 'media' }, 
     ]}],
   access:{
     read: (): boolean => true

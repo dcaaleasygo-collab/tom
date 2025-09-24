@@ -37,6 +37,7 @@
 .header-nav li {
   margin-left: 2rem;
   margin-top: 1rem;
+  line-height: 2;
 
 }
 
@@ -81,7 +82,31 @@
     text-align: right;
     padding-right: 1rem;
   }
-  .mobile-menu-button {
+
+
+ .Escribenos {
+  margin-left: 2rem;
+  background-color: #5020ff;  
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+}
+
+.Escribenos a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff; 
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.Escribenos img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.mobile-menu-button {
     display: block;
   }
 

@@ -35,5 +35,3 @@ const Footer: GlobalConfig = {
   },
 }
 export default Footer
-
-//Hola

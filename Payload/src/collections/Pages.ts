@@ -1,16 +1,38 @@
-import type { CollectionConfig } from 'payload'
+// src/collections/Pages.ts
+import { CollectionConfig } from 'payload'
 
-export const Media: CollectionConfig = {
-  slug: 'media',
-  access: {
-    read: () => true,
-  },
+export const Pages: CollectionConfig = {
+  slug: 'pages',
   fields: [
     {
-      name: 'alt',
+      name: 'title',
       type: 'text',
       required: true,
     },
+    {
+      name: 'slug',
+      type: 'text',
+      required: true,
+      unique: true, 
+    },
+    {
+      name: 'layout',
+      type: 'blocks',
+      blocks: [
+        {
+          slug: 'hero',
+          fields: [
+            { name: 'heading', type: 'text' },
+            { name: 'subheading', type: 'text' },
+          ],
+        },
+        {
+          slug: 'content',
+          fields: [
+            { name: 'body', type: 'textarea' },
+          ],
+        },
+      ],
+    },
   ],
-  upload: true,
 }

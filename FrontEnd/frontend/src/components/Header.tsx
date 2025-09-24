@@ -7,9 +7,16 @@ interface MenuItem {
   url: string
 }
 
+interface Contacto {
+  text: string
+  url: string
+  logo_: { url: string }
+}
+
 interface HeaderGlobal {
   logo: { url: string }
   menu: MenuItem[]
+  contacto?: Contacto  
 }
 
 export function Header() {
@@ -34,14 +41,25 @@ export function Header() {
 </div>
 
         <nav>
-          <ul className="header-nav">
-            {header.menu.map((item, idx) => (
-              <li key={idx}>
-                <a href={item.url}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+  <ul className="header-nav">
+    {header.menu.map((item, idx) => (
+      <li key={idx}>
+        <a href={item.url}>{item.label}</a>
+      </li>
+    ))}
+  </ul>
+
+  {header.contacto && (
+  <div className="Escribenos">
+    <a href={header.contacto.url}>
+      {header.contacto.text}
+      {header.contacto.logo_ && <img src={header.contacto.logo_.url} alt="logo" />}
+    </a>
+  </div>
+)}
+
+</nav>
+
       </div>
     </header>
   )
