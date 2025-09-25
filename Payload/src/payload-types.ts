@@ -177,15 +177,51 @@ export interface Page {
         | {
             heading?: string | null;
             subheading?: string | null;
+            images?: (string | null) | Media;
             id?: string | null;
             blockName?: string | null;
             blockType: 'hero';
           }
         | {
-            body?: string | null;
+            body?:
+              | {
+                  Text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            images?: (string | null) | Media;
+            gifs?:
+              | {
+                  Gif?: (string | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'content';
+            blockType: 'content_header';
+          }
+        | {
+            body?:
+              | {
+                  Text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            images?:
+              | {
+                  Images?: (string | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            gifs?:
+              | {
+                  Gif?: (string | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'content_Body';
           }
       )[]
     | null;
@@ -308,13 +344,50 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               heading?: T;
               subheading?: T;
+              images?: T;
               id?: T;
               blockName?: T;
             };
-        content?:
+        content_header?:
           | T
           | {
-              body?: T;
+              body?:
+                | T
+                | {
+                    Text?: T;
+                    id?: T;
+                  };
+              images?: T;
+              gifs?:
+                | T
+                | {
+                    Gif?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        content_Body?:
+          | T
+          | {
+              body?:
+                | T
+                | {
+                    Text?: T;
+                    id?: T;
+                  };
+              images?:
+                | T
+                | {
+                    Images?: T;
+                    id?: T;
+                  };
+              gifs?:
+                | T
+                | {
+                    Gif?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

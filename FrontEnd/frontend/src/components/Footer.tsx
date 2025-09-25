@@ -36,45 +36,36 @@ export function Footer() {
   return (
     <footer className="footer-container">
       <div className="footer-brand">
-
-        <img
-          src={footer.logo.url}
-        />
+        <img src={footer.logo.url}/>
         <div className="footer-inner">
-
         </div>
+      </div>
 
+      <div className="footer-social">
+       {footer.socials.map((item, idx) => (
+          <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer">
+            {item.logo && (
+              <img src={item.logo.url} alt={item.content} />
+            )}
+          </a>
+        ))} 
+      </div>
 
-        </div>
-
-
-        <div className="footer-social">
-          {footer.socials.map((item, idx) => (
-            <a key={idx} href={item.url} target="_blank" rel="noopener noreferrer">
-              {item.logo && (
-                <img src={item.logo.url} alt={item.content} />
-              )}
-            </a>
+      <div className="footer-separator"></div>
+      <nav>
+        <ul className="footer-nav">
+          {footer.footerSections?.map((item, idx) => (
+            <li key={idx}>
+              <a href={item.url}>
+                {item.logo && (
+                  <img src={item.logo.url} alt={item.content} />
+                )}
+                {item.content}
+              </a>
+            </li>
           ))}
-        </div>
-
-          <div className="footer-separator"></div>  
-
-        <nav>
-          <ul className="footer-nav">
-            {footer.footerSections?.map((item, idx) => (
-              <li key={idx}>
-                <a href={item.url}>
-                  {item.logo && (
-                    <img src={item.logo.url} alt={item.content} />
-                  )}
-                  {item.content}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
+        </ul>
+      </nav>
     </footer>
   )
-}
+} 

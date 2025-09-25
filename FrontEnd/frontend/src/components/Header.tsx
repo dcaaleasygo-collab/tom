@@ -57,9 +57,7 @@ export function Header() {
     </a>
   </div>
 )}
-
 </nav>
-
       </div>
     </header>
   )
