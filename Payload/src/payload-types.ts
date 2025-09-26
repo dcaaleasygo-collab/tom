@@ -163,6 +163,32 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -184,40 +210,48 @@ export interface Page {
           }
         | {
             body?:
-              | {
-                  Text?: string | null;
-                  id?: string | null;
-                }[]
+              | (
+                  | {
+                      value?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'text';
+                    }
+                  | {
+                      file?: (string | null) | Media;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'gif';
+                    }
+                )[]
               | null;
             images?: (string | null) | Media;
-            gifs?:
-              | {
-                  Gif?: (string | null) | Media;
-                  id?: string | null;
-                }[]
-              | null;
             id?: string | null;
             blockName?: string | null;
             blockType: 'content_header';
           }
         | {
             body?:
-              | {
-                  Text?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            images?:
-              | {
-                  Images?: (string | null) | Media;
-                  id?: string | null;
-                }[]
-              | null;
-            gifs?:
-              | {
-                  Gif?: (string | null) | Media;
-                  id?: string | null;
-                }[]
+              | (
+                  | {
+                      value?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'text';
+                    }
+                  | {
+                      file?: (string | null) | Media;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'gif';
+                    }
+                  | {
+                      file?: (string | null) | Media;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'image';
+                    }
+                )[]
               | null;
             id?: string | null;
             blockName?: string | null;
@@ -328,6 +362,40 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -354,16 +422,22 @@ export interface PagesSelect<T extends boolean = true> {
               body?:
                 | T
                 | {
-                    Text?: T;
-                    id?: T;
+                    text?:
+                      | T
+                      | {
+                          value?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    gif?:
+                      | T
+                      | {
+                          file?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               images?: T;
-              gifs?:
-                | T
-                | {
-                    Gif?: T;
-                    id?: T;
-                  };
               id?: T;
               blockName?: T;
             };
@@ -373,20 +447,27 @@ export interface PagesSelect<T extends boolean = true> {
               body?:
                 | T
                 | {
-                    Text?: T;
-                    id?: T;
-                  };
-              images?:
-                | T
-                | {
-                    Images?: T;
-                    id?: T;
-                  };
-              gifs?:
-                | T
-                | {
-                    Gif?: T;
-                    id?: T;
+                    text?:
+                      | T
+                      | {
+                          value?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    gif?:
+                      | T
+                      | {
+                          file?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    image?:
+                      | T
+                      | {
+                          file?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               id?: T;
               blockName?: T;
