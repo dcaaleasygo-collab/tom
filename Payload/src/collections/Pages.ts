@@ -30,38 +30,68 @@ export const Pages: CollectionConfig = {
           ],
         },
         {
-  slug: 'content_header',
-  fields: [
-    {
-      name: 'body',
-      type: 'blocks',
-      blocks: [
-        { slug: 'text', fields: [{ name: 'value', type: 'text' }] },
-        { slug: 'gif', fields: [{ name: 'file', type: 'upload', relationTo: 'media' }] },
-        {
-          slug: 'image_center', // NUEVO
+          slug: 'content_header',
           fields: [
-            { name: 'file', type: 'upload', relationTo: 'media' },
             {
-              name: 'position',
-              type: 'select',
-              label: 'Posición vertical',
-              options: [
-                { label: 'Arriba', value: 'top' },
-                { label: 'Centro', value: 'center' },
-                { label: 'Abajo', value: 'bottom' }
-              ],
-              defaultValue: 'center'
-            }
+              name: 'body',
+              type: 'blocks',
+              blocks: [
+                { slug: 'text', fields: [{ name: 'value', type: 'text' }] },
+                { slug: 'gif', fields: [{ name: 'file', type: 'upload', relationTo: 'media' }] },
+                {
+                  slug: 'image_center',
+                  fields: [
+                    { name: 'file', type: 'upload', relationTo: 'media' },
+                    {
+                      name: 'position',
+                      type: 'select',
+                      label: 'Posición',
+                      options: [
+                        { label: 'derecha', value: 'right' },
+                        { label: 'Centro', value: 'center' },
+                        { label: 'izquierda', value: 'left' }
+                      ],
+                      defaultValue: 'center'
+                    }
+                  ]
+                },
+                {
+                  slug: 'buttonText', fields: [{
+                    name: 'buttonText',
+                    type: 'text',
+                    label: 'Texto del botón',
+                    required: false,
+                  }
+                  ]
+                }, {
+                  slug: 'moderText',
+                  fields: [
+                    {
+                      name: 'value',
+                      type: 'text',
+                      label: 'Texto de Moder',
+                      required: false,
+                    },
+                      {
+                      name: 'position',
+                      type: 'select',
+                      label: 'Posición',
+                      options: [
+                        { label: 'derecha', value: 'right' },
+                        { label: 'Centro', value: 'center' },
+                        { label: 'izquierda', value: 'left' }
+                      ],
+                      defaultValue: 'center'
+                    }
+                  ]
+                }
+
+              ]
+            },
+            { name: 'images', type: 'upload', relationTo: 'media' },
+
           ]
-        }
-      ]
-    },
-    { name: 'images', type: 'upload', relationTo: 'media' }
-  ]
-}
-  
-,
+        },
         {
           slug: 'content_Body',
           fields: [
@@ -92,33 +122,21 @@ export const Pages: CollectionConfig = {
           ],
         },
         {
-          slug: 'image_section',
-          labels: { singular: 'Sección de Imagen', plural: 'Secciones de Imagen' },
+          slug: 'row',
           fields: [
             {
-              name: 'position',
-              type: 'select',
-              options: [
-                { label: 'Arriba', value: 'top' },
-                { label: 'Centro', value: 'center' },
-                { label: 'Abajo', value: 'bottom' },
-              ],
-              defaultValue: 'center',
-            },
-            {
-              name: 'body',
-              type: 'array',
-              fields: [
-                {
-                  name: 'media',
-                  type: 'upload',
-                  relationTo: 'media',
-                },
-              ],
-            },
-          ],
-        },
+              name: 'columns',
+              type: 'blocks',
+              blocks: [
+                { slug: 'text', fields: [{ name: 'value', type: 'text' }] },
+                { slug: 'image', fields: [{ name: 'file', type: 'upload', relationTo: 'media' }] },
+              ]
+            }
+          ]
+        }
       ],
     },
   ],
-}
+}   
+
+

@@ -234,10 +234,23 @@ export interface Page {
                     }
                   | {
                       file?: (string | null) | Media;
-                      position?: ('top' | 'center' | 'bottom') | null;
+                      position?: ('right' | 'center' | 'left') | null;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'image_center';
+                    }
+                  | {
+                      buttonText?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'buttonText';
+                    }
+                  | {
+                      value?: string | null;
+                      position?: ('right' | 'center' | 'left') | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'moderText';
                     }
                 )[]
               | null;
@@ -274,16 +287,25 @@ export interface Page {
             blockType: 'content_Body';
           }
         | {
-            position?: ('top' | 'center' | 'bottom') | null;
-            body?:
-              | {
-                  media?: (string | null) | Media;
-                  id?: string | null;
-                }[]
+            columns?:
+              | (
+                  | {
+                      value?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'text';
+                    }
+                  | {
+                      file?: (string | null) | Media;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'image';
+                    }
+                )[]
               | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'image_section';
+            blockType: 'row';
           }
       )[]
     | null;
@@ -483,6 +505,21 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                    buttonText?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    moderText?:
+                      | T
+                      | {
+                          value?: T;
+                          position?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               images?: T;
               id?: T;
@@ -519,15 +556,26 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        image_section?:
+        row?:
           | T
           | {
-              position?: T;
-              body?:
+              columns?:
                 | T
                 | {
-                    media?: T;
-                    id?: T;
+                    text?:
+                      | T
+                      | {
+                          value?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    image?:
+                      | T
+                      | {
+                          file?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               id?: T;
               blockName?: T;

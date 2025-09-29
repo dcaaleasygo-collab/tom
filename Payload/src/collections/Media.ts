@@ -27,7 +27,7 @@ export const Media: CollectionConfig = {
       {
         name: 'custom250',
         width: 250,
-        height: 250,
+        height: 40,
         fit: 'cover',
       },
     ],
@@ -47,7 +47,7 @@ export const Media: CollectionConfig = {
         { label: 'Pequeño (200x200)', value: 'small' },
         { label: 'Mediano (500x500)', value: 'medium' },
         { label: 'Grande (1000x1000)', value: 'large' },
-        { label: 'Custom (250x250)', value: 'custom250' },
+        { label: 'Custom (250x40)', value: 'custom250' },
       ],
       required: true,
       defaultValue: 'medium',
