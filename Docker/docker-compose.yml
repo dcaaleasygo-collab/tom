@@ -34,10 +34,12 @@ services:
     container_name: frontend
     ports:
       - "5173:5173"
-    volumes:  
-      - ../FrontEnd/frontend:/app
+    volumes:
+    - ../FrontEnd/frontend:/app
+    - /app/node_modules  
     depends_on:
       - backend
+
 
 
 volumes:

@@ -152,6 +152,7 @@ export interface User {
 export interface Media {
   id: string;
   alt: string;
+  size: 'small' | 'medium' | 'large' | 'custom250';
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -181,6 +182,14 @@ export interface Media {
       filename?: string | null;
     };
     large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    custom250?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -223,6 +232,13 @@ export interface Page {
                       blockName?: string | null;
                       blockType: 'gif';
                     }
+                  | {
+                      file?: (string | null) | Media;
+                      position?: ('top' | 'center' | 'bottom') | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'image_center';
+                    }
                 )[]
               | null;
             images?: (string | null) | Media;
@@ -256,6 +272,18 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'content_Body';
+          }
+        | {
+            position?: ('top' | 'center' | 'bottom') | null;
+            body?:
+              | {
+                  media?: (string | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'image_section';
           }
       )[]
     | null;
@@ -351,6 +379,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  size?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -386,6 +415,16 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
         large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        custom250?:
           | T
           | {
               url?: T;
@@ -436,6 +475,14 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                    image_center?:
+                      | T
+                      | {
+                          file?: T;
+                          position?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
                   };
               images?: T;
               id?: T;
@@ -468,6 +515,19 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        image_section?:
+          | T
+          | {
+              position?: T;
+              body?:
+                | T
+                | {
+                    media?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;

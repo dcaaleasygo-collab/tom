@@ -1,4 +1,4 @@
-body-container {
+.body-container {
   width: 100%;
   height: 100%;
   margin: 0;
@@ -39,4 +39,70 @@ body-container {
 .Texto img {
   max-width: 500px; 
   height: auto;   
+}
+
+/* 🔹 Tamaños controlados por Payload (PNG/JPG) */
+.img-small {
+  width: 200px;
+  height: auto;
+}
+
+.img-medium {
+  width: 500px;
+  height: auto;
+}
+
+.img-large {
+  width: 1000px;
+  height: auto;
+}
+
+.gif-small {
+  width: 200px;
+  height: auto;
+}
+
+.gif-medium {
+  width: 500px;
+  height: auto;
+}
+
+.gif-large {
+  width: 1000px;
+  height: auto;
+}
+
+/* 🔹 Responsivo: nunca salirse del contenedor */
+.img-small,
+.img-medium,
+.img-large,
+.gif-small,
+.gif-medium,
+.gif-large {
+  max-width: 100%;
+}
+
+.image-section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.image-section.top {
+  align-items: flex-start;
+}
+
+.image-section.center {
+  align-items: center;
+}
+
+.image-section.bottom {
+  align-items: flex-end;
+}
+
+.image-section img {
+  max-width: 200px;
+  height: auto;
 }

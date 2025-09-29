@@ -6,8 +6,8 @@ export const Media: CollectionConfig = {
     read: () => true,
   },
   upload: {
-    staticDir: 'media', // Carpeta donde se guardan los archivos
-    mimeTypes: ['image/*', 'image/gif'], // Opcional: restringir a imágenes/GIFs
+    staticDir: 'media',
+    mimeTypes: ['image/*', 'image/gif'],
     imageSizes: [
       {
         name: 'small',
@@ -24,14 +24,33 @@ export const Media: CollectionConfig = {
         width: 1000,
         height: 1000,
       },
+      {
+        name: 'custom250',
+        width: 250,
+        height: 250,
+        fit: 'cover',
+      },
     ],
-    adminThumbnail: 'small', // Muestra el tamaño small en el admin
+    adminThumbnail: 'small',
   },
   fields: [
     {
       name: 'alt',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'size',
+      type: 'select',
+      label: 'Tamaño de imagen',
+      options: [
+        { label: 'Pequeño (200x200)', value: 'small' },
+        { label: 'Mediano (500x500)', value: 'medium' },
+        { label: 'Grande (1000x1000)', value: 'large' },
+        { label: 'Custom (250x250)', value: 'custom250' },
+      ],
+      required: true,
+      defaultValue: 'medium',
     },
   ],
 }
