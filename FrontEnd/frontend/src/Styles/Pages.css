@@ -3,6 +3,8 @@
   height: 100%;
   margin: 0;
   padding: 0;
+  padding-top: 6.2rem; /* la misma altura del header */
+  margin-top: 66rem;
 }
 
 .banner-Principal {
@@ -110,7 +112,6 @@ button:hover {
   background-color: #fff;
 }
 
-
 .Subrayado{
   width: 100%;
   height: 5px;
@@ -139,4 +140,53 @@ button:hover {
   height: 100%;
   margin: 1.5rem auto;
   background: #ff0000
+}
+
+.Slider {
+  position: absolute;
+  inset: 0;
+}
+
+.Slider .swiper-slide {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-Principal,
+.banner-Secundario,
+.parte-2 {
+  width: 100%;
+  min-height: 100vh;  
+  position: relative; 
+}
+
+
+.banner-Secundario .Texto {
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  align-items: flex-start;
+  text-align: left;   
+  font-size: 300%;
+  margin: 1rem;    
+}
+
+.banner-Secundario .Texto p,
+.banner-Secundario .Texto img {
+  margin: 0.5px 0; 
+}
+
+.parte-2 {
+  background-color: rgb(252, 252, 252);
+  height: 100px; 
+  width: 100%;
+}
+
+.parte-3 {
+  background-color: rgb(121, 83, 83);
+  height: 100px; 
+  width: 100%;
 }

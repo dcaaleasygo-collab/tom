@@ -210,12 +210,46 @@ export interface Page {
   layout?:
     | (
         | {
-            heading?: string | null;
-            subheading?: string | null;
+            body?:
+              | (
+                  | {
+                      value?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'text';
+                    }
+                  | {
+                      file?: (string | null) | Media;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'gif';
+                    }
+                  | {
+                      file?: (string | null) | Media;
+                      position?: ('right' | 'center' | 'left') | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'image_center';
+                    }
+                  | {
+                      buttonText?: string | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'buttonText';
+                    }
+                  | {
+                      value?: string | null;
+                      position?: ('right' | 'center' | 'left') | null;
+                      id?: string | null;
+                      blockName?: string | null;
+                      blockType: 'moderText';
+                    }
+                )[]
+              | null;
             images?: (string | null) | Media;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'hero';
+            blockType: 'content_header';
           }
         | {
             body?:
@@ -257,7 +291,7 @@ export interface Page {
             images?: (string | null) | Media;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'content_header';
+            blockType: 'content_header_2';
           }
         | {
             body?:
@@ -468,16 +502,55 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        hero?:
+        content_header?:
           | T
           | {
-              heading?: T;
-              subheading?: T;
+              body?:
+                | T
+                | {
+                    text?:
+                      | T
+                      | {
+                          value?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    gif?:
+                      | T
+                      | {
+                          file?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    image_center?:
+                      | T
+                      | {
+                          file?: T;
+                          position?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    buttonText?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                    moderText?:
+                      | T
+                      | {
+                          value?: T;
+                          position?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
               images?: T;
               id?: T;
               blockName?: T;
             };
-        content_header?:
+        content_header_2?:
           | T
           | {
               body?:
