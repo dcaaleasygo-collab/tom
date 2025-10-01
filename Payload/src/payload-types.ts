@@ -321,25 +321,19 @@ export interface Page {
             blockType: 'content_Body';
           }
         | {
-            columns?:
-              | (
-                  | {
-                      value?: string | null;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'text';
-                    }
-                  | {
-                      file?: (string | null) | Media;
-                      id?: string | null;
-                      blockName?: string | null;
-                      blockType: 'image';
-                    }
-                )[]
+            sliders?:
+              | {
+                  value?: string | null;
+                  url?: string | null;
+                  file?: (string | null) | Media;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'card';
+                }[]
               | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'row';
+            blockType: 'Servicios';
           }
       )[]
     | null;
@@ -629,22 +623,17 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        row?:
+        Servicios?:
           | T
           | {
-              columns?:
+              sliders?:
                 | T
                 | {
-                    text?:
+                    card?:
                       | T
                       | {
                           value?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                    image?:
-                      | T
-                      | {
+                          url?: T;
                           file?: T;
                           id?: T;
                           blockName?: T;

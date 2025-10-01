@@ -64,7 +64,7 @@ export const Pages: CollectionConfig = {
                       label: 'Texto de Moder',
                       required: false,
                     },
-                      {
+                    {
                       name: 'position',
                       type: 'select',
                       label: 'Posición',
@@ -127,7 +127,7 @@ export const Pages: CollectionConfig = {
                       label: 'Texto de Moder',
                       required: false,
                     },
-                      {
+                    {
                       name: 'position',
                       type: 'select',
                       label: 'Posición',
@@ -177,21 +177,27 @@ export const Pages: CollectionConfig = {
           ],
         },
         {
-          slug: 'row',
+          slug: 'Servicios',
           fields: [
             {
-              name: 'columns',
+              name: 'sliders',
               type: 'blocks',
               blocks: [
-                { slug: 'text', fields: [{ name: 'value', type: 'text' }] },
-                { slug: 'image', fields: [{ name: 'file', type: 'upload', relationTo: 'media' }] },
-              ]
-            }
-          ]
-        }
-      ],
-    },
-  ],
-}   
+                {
+                  slug: 'card',
+                  fields: [
+                    { name: 'value', type: 'text' },
+                    { name: 'url', type: 'text' },
+                    { name: 'file', type: 'upload', relationTo: 'media' }
 
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    }
+  ]
+}
 

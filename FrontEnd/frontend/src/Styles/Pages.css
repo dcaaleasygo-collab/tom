@@ -3,8 +3,8 @@
   height: 100%;
   margin: 0;
   padding: 0;
-  padding-top: 6.2rem; /* la misma altura del header */
-  margin-top: 66rem;
+  margin-bottom: 102rem;
+  position: relative;
 }
 
 .banner-Principal {
@@ -39,7 +39,7 @@
 }
 
 .Texto img {
-  max-width: 500px; 
+  max-width: 100%; 
   height: auto;   
 }
 
@@ -143,14 +143,19 @@ button:hover {
 }
 
 .Slider {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden !important;
+}
+
+.swiper-wrapper {
+  width: 100% !important;
 }
 
 .Slider .swiper-slide {
   width: 100% !important;
   height: 100% !important;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -180,13 +185,29 @@ button:hover {
 }
 
 .parte-2 {
-  background-color: rgb(252, 252, 252);
-  height: 100px; 
+  background-color: #fff;
+  position: relative;
   width: 100%;
+  min-height: 100vh;   
+  
+  display: flex;
+  justify-content: center;   
+  align-items: flex-start;  
 }
 
-.parte-3 {
-  background-color: rgb(121, 83, 83);
-  height: 100px; 
+.parte-2 p {
+  margin: 0;
+  color: #ff0000;
+  margin-bottom: 13em;
+  font-weight: bold;
+  font-size: 4rem;
+  font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.formulario {
+  background-color: #474747;
+  position: relative;
   width: 100%;
+  min-height: 63vh;
 }
