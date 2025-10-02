@@ -20,8 +20,6 @@ interface ServiciosBlock {
   sliders: CardBlock[]
 }
 
-
-
 interface HeroBlock {
   blockType: 'hero'
   heading: string
@@ -101,7 +99,7 @@ interface BannerSecundarioBlock {
 }
 
 type BodyBlock = TextBlock | GifBlock | ImageBlock | ImageCenterBlock | RowBlock | ButtonBlock | ModerTextBlock
-  | BannerSecundarioBlock | ContentHeader2Block
+  | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock
 
 interface ContentHeaderBlock {
   blockType: 'content_header'
@@ -123,9 +121,6 @@ interface ContentBodyBlock {
   images?: Media
   Text: string
 }
-
-
-
 
 interface ImageSectionBlock {
   blockType: 'image_section'
@@ -157,8 +152,9 @@ export function Pages() {
 
   if (!pages) return null
 
-  return (
 
+
+  return (
     <div className="body-container">
       <div className='slider-container'>
         <Swiper
@@ -427,50 +423,56 @@ export function Pages() {
           </SwiperSlide>
         </Swiper>
       </div>
+
+
+
       <div className='parte-2'>
+        <div className='Titulo'>
+          {pages.layout.map((block, idx) => {
+            if (block.blockType == 'content_Body') {
+              const bodyBlocks = block.body || []
 
-        {pages.layout.map((block, idx) => {
-          if (block.blockType == 'content_Body') {
-            const bodyBlocks = block.body || []
+              return (
+                <section
+                  key={idx}
+                  className='content'>
+                  {bodyBlocks.map(item => {
+                    if (item.blockType === 'text') return <p key={item.id}>{item.value}</p>
+                  })}
+                </section>
+              )
+            }
+          })}
+        </div>
 
+        <div className='Servicios-Slider'>
 
-            return (
-              <section
-                key={idx}
-                className='content'>
-                {bodyBlocks.map(item => {
-                  if (item.blockType === 'text') return <p key={item.id}>{item.value}</p>
-                })}
-              </section>
-            )
-          }
-          <div className='Servicios-Slider'>
-            {pages.layout.map((block, idx) => {
-              if (block.blockType === 'Servicios') {
-
-                return (
-                  <div key={idx} className="Servicios-Slider">
-                    {block.sliders?.map((card, i) => (
-                      <div key={i} className="card">
-                        <img src={card.file?.url} alt={card.file?.filename} />
-                        <p>{card.value}</p>
-                        <a href={card.url} target="_blank" rel="noopener noreferrer">
-                          Ir al enlace
-                        </a>
-                      </div>
-                    ))}
-                  </div>)}
-              return null
-            })}
-          </div>
-        })}
-
-
+          {pages.layout.map((block, idx) => {
+            if (block.blockType == 'Servicios' && block.sliders?.length > 0) {
+              return (
+                <Swiper key={idx} slidesPerView={1} loop autoplay={{ delay: 4000 }}>
+                  {block.sliders.map((card, i) => (
+                    <SwiperSlide key={i}>
+                      <a className='url' href={card.url} target="_blank" rel="noopener noreferrer">
+                        <div className="card">
+                          <img src={card.file?.url} alt={card.file?.filename} />
+                          <p>{card.value}</p>
+                        </div>
+                      </a>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              )
+            }else {
+    console.log('No es Servicios:', block.blockType, block)
+    return null
+  }  })}
+        </div>
       </div>
 
+
+
       <div className='formulario'>
-
-
         {pages.layout.map((block, idx) => {
           if (block.blockType === 'hero') {
             return (
@@ -480,37 +482,35 @@ export function Pages() {
               </section>
             )
           }
-
           if (block.blockType === 'content_header_2') {
-
             return (
               <section
                 key={idx}
                 className="content"
                 style={{
                   backgroundImage: block.images
-                    ? `linear-gradient(rgba(11, 37, 44, 0.77), rgba(0, 153, 255, 0.95)), url(${block.images.url})`
+                    ? `linear-gradient(rgba(0,11,65,0.84), rgba(253,37,120,0.95)), url(${block.images.url})`
                     : undefined,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
                   minHeight: '100vh',
-                }}
-
-              >
+                }}>
                 <div className='formulario'>
-                
-
                 </div>
-
               </section>
             )
           }
           return null
         })}
-
       </div>
-
     </div>
   )
 }
+
+
+
+
+
+
+
