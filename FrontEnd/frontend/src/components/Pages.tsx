@@ -427,48 +427,51 @@ export function Pages() {
 
 
       <div className='parte-2'>
+
+        {/* TÍTULOS / CONTENIDO BODY */}
         <div className='Titulo'>
-          {pages.layout.map((block, idx) => {
-            if (block.blockType == 'content_Body') {
-              const bodyBlocks = block.body || []
-
-              return (
-                <section
-                  key={idx}
-                  className='content'>
-                  {bodyBlocks.map(item => {
-                    if (item.blockType === 'text') return <p key={item.id}>{item.value}</p>
-                  })}
-                </section>
-              )
-            }
-          })}
+          {pages.layout
+            .filter(block => block.blockType === 'content_Body')
+            .map((block, idx) => (
+              <section key={idx} className='content'>
+                {block.body?.map(item => {
+                  if (item.blockType === 'text') return <p key={item.id}>{item.value}</p>
+                  return null
+                })}
+              </section>
+            ))}
         </div>
 
+        {/* SERVICIOS CON SWIPER */}
         <div className='Servicios-Slider'>
-
-          {pages.layout.map((block, idx) => {
-            if (block.blockType == 'Servicios' && block.sliders?.length > 0) {
-              return (
-                <Swiper key={idx} slidesPerView={1} loop autoplay={{ delay: 4000 }}>
-                  {block.sliders.map((card, i) => (
-                    <SwiperSlide key={i}>
-                      <a className='url' href={card.url} target="_blank" rel="noopener noreferrer">
-                        <div className="card">
-                          <img src={card.file?.url} alt={card.file?.filename} />
-                          <p>{card.value}</p>
-                        </div>
-                      </a>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              )
-            }else {
-    console.log('No es Servicios:', block.blockType, block)
-    return null
-  }  })}
+          {pages.layout
+            .filter((block): block is ServiciosBlock => block.blockType === 'Servicios' && block.sliders?.length > 0)
+            .map((block, idx) => (
+              <Swiper
+                key={idx}
+                slidesPerView={3}
+                loop = {true}
+                modules={[Navigation]}
+                autoplay={{ delay: 4000, disableOnInteraction: false }}
+                navigation
+              >
+                {block.sliders.map((card, i) => (
+                  <SwiperSlide key={i}>
+                    <a className='url' href={card.url} target="_blank" rel="noopener noreferrer">
+                      <div className="card">
+                        <img src={card.file?.url} alt={card.file?.filename} />
+                        <p>{card.value}</p>
+                      </div>
+                    </a>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ))}
         </div>
+
+
       </div>
+
 
 
 

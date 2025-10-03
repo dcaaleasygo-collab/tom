@@ -208,15 +208,65 @@ button:hover {
   font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.card{
-  background-color: #fffbfb;
-}
-.Servicios-Slider p{
+.card {
+  margin-left: 2rem;  
+  margin-right: 2rem;
+  background: #b69c9c;    
+  border-radius: 10px;
+  padding: 2rem;     
   display: flex;
-  flex-direction: column;  
-  justify-content: flex-start;
-  align-items: center; 
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+
+.card:hover {
+  transform: scale(1.05);                  
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+}
+
+  .Servicios-Slider .swiper-slide img {
+  width: 80%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.Servicios-Slider .swiper-slide img:hover {
+  transform: scale(1.1);
+}
+
+
+.card p, 
+.card h3, 
+.card h4 {
+  transition: font-size 0.3s ease;
+}
+
+.card:hover p,
+.card:hover h3,
+.card:hover h4 {
+  font-size: 1.1em;  
+}
+
+.Servicios-Slider {
+  max-width: 1000px;
+}
+
+.Servicios-Slider .swiper-slide {
+  transition: transform 0.3s ease;
+}
+
+.Servicios-Slider .swiper-button-next,
+.Servicios-Slider .swiper-button-prev {
+  color: #ff0000;
+  height: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
 
 
 
