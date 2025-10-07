@@ -275,6 +275,7 @@ export interface Page {
                     }
                   | {
                       buttonText?: string | null;
+                      url: string;
                       id?: string | null;
                       blockName?: string | null;
                       blockType: 'buttonText';
@@ -334,6 +335,31 @@ export interface Page {
             id?: string | null;
             blockName?: string | null;
             blockType: 'Servicios';
+          }
+        | {
+            titulo?: string | null;
+            bloques?:
+              | {
+                  date?: string | null;
+                  Title?: string | null;
+                  value?: string | null;
+                  url?: string | null;
+                  file?: (string | null) | Media;
+                  id?: string | null;
+                  blockName?: string | null;
+                  blockType: 'card';
+                }[]
+              | null;
+            botones?:
+              | {
+                  texto?: string | null;
+                  url?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'Tendencias';
           }
       )[]
     | null;
@@ -576,6 +602,7 @@ export interface PagesSelect<T extends boolean = true> {
                       | T
                       | {
                           buttonText?: T;
+                          url?: T;
                           id?: T;
                           blockName?: T;
                         };
@@ -638,6 +665,35 @@ export interface PagesSelect<T extends boolean = true> {
                           id?: T;
                           blockName?: T;
                         };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        Tendencias?:
+          | T
+          | {
+              titulo?: T;
+              bloques?:
+                | T
+                | {
+                    card?:
+                      | T
+                      | {
+                          date?: T;
+                          Title?: T;
+                          value?: T;
+                          url?: T;
+                          file?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              botones?:
+                | T
+                | {
+                    texto?: T;
+                    url?: T;
+                    id?: T;
                   };
               id?: T;
               blockName?: T;

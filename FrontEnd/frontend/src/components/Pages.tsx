@@ -15,10 +15,31 @@ interface CardBlock {
   file: Media
 }
 
+
 interface ServiciosBlock {
   blockType: 'Servicios'
   sliders: CardBlock[]
 }
+
+
+interface TendenciaCard {
+  value: string
+  url: string
+  Title:string
+  date:string
+  file: Media
+}
+
+interface TendenciasBlock {
+  blockType: 'Tendencias'
+  titulo: string
+  bloques: TendenciaCard[]
+  botones?: {
+    texto: string
+    url: string
+  }[]
+}
+
 
 interface HeroBlock {
   blockType: 'hero'
@@ -36,6 +57,7 @@ interface ButtonBlock {
   id: string
   blockType: 'buttonText'
   buttonText: string
+  url: string
 }
 
 interface Media {
@@ -99,7 +121,7 @@ interface BannerSecundarioBlock {
 }
 
 type BodyBlock = TextBlock | GifBlock | ImageBlock | ImageCenterBlock | RowBlock | ButtonBlock | ModerTextBlock
-  | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock
+  | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock | TendenciasBlock
 
 interface ContentHeaderBlock {
   blockType: 'content_header'
@@ -128,7 +150,7 @@ interface ImageSectionBlock {
   body: { media: Media }[]
 }
 
-type LayoutBlock = HeroBlock | ContentHeaderBlock | ContentBodyBlock | ImageSectionBlock | RowBlock | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock
+type LayoutBlock = HeroBlock | ContentHeaderBlock | ContentBodyBlock | ImageSectionBlock | RowBlock | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock | TendenciasBlock
 
 interface Page {
   title: string
@@ -223,7 +245,10 @@ export function Pages() {
                         {bodyBlocks.map(item => {
                           if (item.blockType === 'buttonText') {
                             return (
+                              
                               <button key={item.id} type="button" className="boton">
+                                <a href={item.url} className="boton">{item.buttonText}</a>
+
                                 {item.buttonText}
                               </button>
                             )
@@ -428,54 +453,95 @@ export function Pages() {
 
       <div className='parte-2'>
 
-        {/* TÍTULOS / CONTENIDO BODY */}
-        <div className='Titulo'>
-          {pages.layout
-            .filter(block => block.blockType === 'content_Body')
-            .map((block, idx) => (
-              <section key={idx} className='content'>
-                {block.body?.map(item => {
-                  if (item.blockType === 'text') return <p key={item.id}>{item.value}</p>
-                  return null
-                })}
-              </section>
-            ))}
+        <div className='Servicios'>
+          <div className='Titulo'>
+            {pages.layout
+              .filter(block => block.blockType === 'content_Body')
+              .map((block, idx) => (
+                <section key={idx} className='content'>
+                  {block.body?.map(item => {
+                    if (item.blockType === 'text') return <p key={item.id}>{item.value}</p>
+                    return null
+                  })}
+                </section>
+              ))}
+          </div>
+
+          <div className='Servicios-Slider'>
+            {pages.layout
+              .filter((block): block is ServiciosBlock => block.blockType === 'Servicios' && block.sliders?.length > 0)
+              .map((block, idx) => (
+                <Swiper
+                  key={idx}
+                  slidesPerView={3}
+                  loop={true}
+                  modules={[Navigation]}
+                  autoplay={{ delay: 4000, disableOnInteraction: false }}
+                  navigation
+                >
+                  {block.sliders.map((card, i) => (
+                    <SwiperSlide key={i}>
+                      <a className='url' href={card.url} target="_blank" rel="noopener noreferrer">
+                        <div className="card">
+                          <img src={card.file?.url} alt={card.file?.filename} />
+                          <p>{card.value}</p>
+                        </div>
+                      </a>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              ))}
+          </div>
         </div>
 
-        {/* SERVICIOS CON SWIPER */}
-        <div className='Servicios-Slider'>
+
+        <div className='Tendencias'>
+          <div className='Titulo'>
+            {pages.layout
+              .filter(block => block.blockType === 'Tendencias')
+              .map((block, idx) => (
+                <h4 key={idx}>{block.titulo}</h4>
+              ))}
+          </div>
+        </div>
+        <div className='Lista'>
           {pages.layout
-            .filter((block): block is ServiciosBlock => block.blockType === 'Servicios' && block.sliders?.length > 0)
+            .filter(block => block.blockType === 'Tendencias')
             .map((block, idx) => (
-              <Swiper
-                key={idx}
-                slidesPerView={3}
-                loop = {true}
-                modules={[Navigation]}
-                autoplay={{ delay: 4000, disableOnInteraction: false }}
-                navigation
-              >
-                {block.sliders.map((card, i) => (
-                  <SwiperSlide key={i}>
-                    <a className='url' href={card.url} target="_blank" rel="noopener noreferrer">
-                      <div className="card">
-                        <img src={card.file?.url} alt={card.file?.filename} />
-                        <p>{card.value}</p>
-                      </div>
-                    </a>
-                  </SwiperSlide>
+              <div key={idx}>
+                {block.botones?.map((boton, i) => (
+                  <a key={i} href={boton.url} target="_blank" rel="noopener noreferrer">
+                    <button>{boton.texto}</button>
+                  </a>
                 ))}
-              </Swiper>
+              </div>
             ))}
         </div>
+       <div className="tendencias-container">
+  {pages.layout
+    .filter(block => block.blockType === 'Tendencias')
+    .flatMap(block => block.bloques)
+    .map((bloque, i) => (
+      <div key={i} className="tendencia-card">
+        <img src={bloque.file.url} alt={bloque.value} />
+        <div className="tendencia-card-content">
+          <h5>{bloque.date}</h5>
+          <h2>{bloque.Title}</h2>
+          <p>{bloque.value}</p>
+          <a href={bloque.url} target="_blank" rel="noopener noreferrer">Ver más</a>
+        </div>
+      </div>
+    ))}
+</div>
+
+
 
 
       </div>
 
 
 
-
-      <div className='formulario'>
+      <div id='formulario'>
         {pages.layout.map((block, idx) => {
           if (block.blockType === 'hero') {
             return (
@@ -510,10 +576,3 @@ export function Pages() {
     </div>
   )
 }
-
-
-
-
-
-
-

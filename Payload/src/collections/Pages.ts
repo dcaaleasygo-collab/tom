@@ -21,6 +21,7 @@ export const Pages: CollectionConfig = {
       name: 'layout',
       type: 'blocks',
       blocks: [
+        // ======== content_header ========
         {
           slug: 'content_header',
           fields: [
@@ -41,21 +42,24 @@ export const Pages: CollectionConfig = {
                       options: [
                         { label: 'derecha', value: 'right' },
                         { label: 'Centro', value: 'center' },
-                        { label: 'izquierda', value: 'left' }
+                        { label: 'izquierda', value: 'left' },
                       ],
-                      defaultValue: 'center'
-                    }
-                  ]
+                      defaultValue: 'center',
+                    },
+                  ],
                 },
                 {
-                  slug: 'buttonText', fields: [{
-                    name: 'buttonText',
-                    type: 'text',
-                    label: 'Texto del botón',
-                    required: false,
-                  }
-                  ]
-                }, {
+                  slug: 'buttonText',
+                  fields: [
+                    {
+                      name: 'buttonText',
+                      type: 'text',
+                      label: 'Texto del botón',
+                      required: false,
+                    },
+                  ],
+                },
+                {
                   slug: 'moderText',
                   fields: [
                     {
@@ -71,19 +75,19 @@ export const Pages: CollectionConfig = {
                       options: [
                         { label: 'derecha', value: 'right' },
                         { label: 'Centro', value: 'center' },
-                        { label: 'izquierda', value: 'left' }
+                        { label: 'izquierda', value: 'left' },
                       ],
-                      defaultValue: 'center'
-                    }
-                  ]
-                }
-
-              ]
+                      defaultValue: 'center',
+                    },
+                  ],
+                },
+              ],
             },
             { name: 'images', type: 'upload', relationTo: 'media' },
-
-          ]
+          ],
         },
+
+        // ======== content_header_2 ========
         {
           slug: 'content_header_2',
           fields: [
@@ -104,21 +108,31 @@ export const Pages: CollectionConfig = {
                       options: [
                         { label: 'derecha', value: 'right' },
                         { label: 'Centro', value: 'center' },
-                        { label: 'izquierda', value: 'left' }
+                        { label: 'izquierda', value: 'left' },
                       ],
-                      defaultValue: 'center'
-                    }
-                  ]
+                      defaultValue: 'center',
+                    },
+                  ],
                 },
                 {
-                  slug: 'buttonText', fields: [{
-                    name: 'buttonText',
-                    type: 'text',
-                    label: 'Texto del botón',
-                    required: false,
-                  }
-                  ]
-                }, {
+                  slug: 'buttonText',
+                  fields: [
+                    {
+                      name: 'buttonText',
+                      type: 'text',
+                      label: 'Texto del botón',
+                      required: false,
+                    },
+                    {
+                      name: 'url',
+                      type: 'text',
+                      label: 'URL del botón',
+                      required: true
+                    },
+                  ],
+                },
+
+                {
                   slug: 'moderText',
                   fields: [
                     {
@@ -134,19 +148,19 @@ export const Pages: CollectionConfig = {
                       options: [
                         { label: 'derecha', value: 'right' },
                         { label: 'Centro', value: 'center' },
-                        { label: 'izquierda', value: 'left' }
+                        { label: 'izquierda', value: 'left' },
                       ],
-                      defaultValue: 'center'
-                    }
-                  ]
-                }
-
-              ]
+                      defaultValue: 'center',
+                    },
+                  ],
+                },
+              ],
             },
             { name: 'images', type: 'upload', relationTo: 'media' },
-
-          ]
+          ],
         },
+
+        // ======== content_Body ========
         {
           slug: 'content_Body',
           fields: [
@@ -156,26 +170,22 @@ export const Pages: CollectionConfig = {
               blocks: [
                 {
                   slug: 'text',
-                  fields: [
-                    { name: 'value', type: 'text' },
-                  ],
+                  fields: [{ name: 'value', type: 'text' }],
                 },
                 {
                   slug: 'gif',
-                  fields: [
-                    { name: 'file', type: 'upload', relationTo: 'media' },
-                  ],
+                  fields: [{ name: 'file', type: 'upload', relationTo: 'media' }],
                 },
                 {
                   slug: 'image',
-                  fields: [
-                    { name: 'file', type: 'upload', relationTo: 'media' },
-                  ],
+                  fields: [{ name: 'file', type: 'upload', relationTo: 'media' }],
                 },
               ],
             },
           ],
         },
+
+        // ======== Servicios ========
         {
           slug: 'Servicios',
           fields: [
@@ -188,16 +198,48 @@ export const Pages: CollectionConfig = {
                   fields: [
                     { name: 'value', type: 'text' },
                     { name: 'url', type: 'text' },
-                    { name: 'file', type: 'upload', relationTo: 'media' }
-
+                    { name: 'file', type: 'upload', relationTo: 'media' },
                   ],
                 },
               ],
             },
           ],
         },
-      ],
-    }
-  ]
-}
 
+        // ======== Tendencias ========
+        {
+          slug: 'Tendencias',
+          fields: [
+            { name: 'titulo', type: 'text' },
+            {
+              name: 'bloques',
+              type: 'blocks',
+              blocks: [
+                {
+                  slug: 'card',
+                  fields: [
+                    { name: 'date', type: 'text' },
+                    { name: 'Title', type: 'text' },
+                    { name: 'value', type: 'text' },
+                    { name: 'url', type: 'text' },
+                    { name: 'file', type: 'upload', relationTo: 'media' },
+                  ],
+                },
+              ],
+            },
+            {
+              name: 'botones',
+              type: 'array',
+              label: 'Botones',
+              fields: [
+                { name: 'texto', type: 'text', label: 'Texto del botón' },
+                { name: 'url', type: 'text', label: 'Enlace del botón' },
+              ],
+            },
+          ],
+        }
+
+      ],
+    },
+  ],
+}

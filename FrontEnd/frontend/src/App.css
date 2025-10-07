@@ -14,9 +14,9 @@ html, body{
 }
 
 main {
-  flex: 1; /* ocupa todo el espacio disponible */
+  flex: 1;
 }
 
 footer {
-  margin-top: auto; /* empuja el footer al final */
+  margin-top: auto; 
 }
