@@ -1,12 +1,28 @@
 import { useEffect, useState } from 'react'
 import '../Styles/Pages.css'
-
+import Tendencias from './Tendencias';
+import type { PayloadPages, TendenciasBlock } from './Tendencias';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from 'swiper/modules';
 import { Navigation } from 'swiper/modules';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
+interface TendenciasPayloadBlock {
+  blockType: 'Tendencias';
+  titulo: string;
+  botones?: { texto: string; url: string }[];
+}
+
+interface FormularioBlock {
+  id: string
+  blockType: 'Formulario'
+  logos: Media[]
+  titulo: string
+  contenido: string
+}
+
 
 interface CardBlock {
   blockType: 'card'
@@ -25,20 +41,11 @@ interface ServiciosBlock {
 interface TendenciaCard {
   value: string
   url: string
-  Title:string
-  date:string
+  Title: string
+  date: string
   file: Media
 }
 
-interface TendenciasBlock {
-  blockType: 'Tendencias'
-  titulo: string
-  bloques: TendenciaCard[]
-  botones?: {
-    texto: string
-    url: string
-  }[]
-}
 
 
 interface HeroBlock {
@@ -121,7 +128,7 @@ interface BannerSecundarioBlock {
 }
 
 type BodyBlock = TextBlock | GifBlock | ImageBlock | ImageCenterBlock | RowBlock | ButtonBlock | ModerTextBlock
-  | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock | TendenciasBlock
+  | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock | TendenciasPayloadBlock | FormularioBlock
 
 interface ContentHeaderBlock {
   blockType: 'content_header'
@@ -150,8 +157,8 @@ interface ImageSectionBlock {
   body: { media: Media }[]
 }
 
-type LayoutBlock = HeroBlock | ContentHeaderBlock | ContentBodyBlock | ImageSectionBlock | RowBlock | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock | TendenciasBlock
-
+type LayoutBlock = HeroBlock | ContentHeaderBlock | ContentBodyBlock | ImageSectionBlock | RowBlock | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock | TendenciasPayloadBlock
+  | FormularioBlock
 interface Page {
   title: string
   slug: string
@@ -175,8 +182,32 @@ export function Pages() {
   if (!pages) return null
 
 
+  const tendenciasBlocks = pages.layout.filter(
+    b => b.blockType === 'Tendencias'
+  ) as TendenciasBlock[];
+
+  const payloadPages: PayloadPages = {
+    layout: tendenciasBlocks.map((block, index) => {
+      const bloques: BloqueGrupo[] = [];
+
+      const cards = block.bloques ?? []; // usa [] si es undefined
+
+      for (let i = 0; i < cards.length; i += 4) {
+        bloques.push({ cards: cards.slice(i, i + 4) });
+      }
+
+
+      return {
+        blockType: block.blockType,
+        titulo: block.titulo,
+        botones: block.botones,
+        bloques
+      } as TendenciasBlock;
+    })
+  }
 
   return (
+
     <div className="body-container">
       <div className='slider-container'>
         <Swiper
@@ -245,7 +276,7 @@ export function Pages() {
                         {bodyBlocks.map(item => {
                           if (item.blockType === 'buttonText') {
                             return (
-                              
+
                               <button key={item.id} type="button" className="boton">
                                 <a href={item.url} className="boton">{item.buttonText}</a>
 
@@ -380,9 +411,7 @@ export function Pages() {
                           }
                           return null
                         })}
-
                         <div className='Subrayado'></div>
-
                         {bodyBlocks.map(item => {
                           if (item.blockType === 'buttonText') {
                             return (
@@ -495,47 +524,10 @@ export function Pages() {
         </div>
 
 
-        <div className='Tendencias'>
-          <div className='Titulo'>
-            {pages.layout
-              .filter(block => block.blockType === 'Tendencias')
-              .map((block, idx) => (
-                <h4 key={idx}>{block.titulo}</h4>
-              ))}
-          </div>
-        </div>
-        <div className='Lista'>
-          {pages.layout
-            .filter(block => block.blockType === 'Tendencias')
-            .map((block, idx) => (
-              <div key={idx}>
-                {block.botones?.map((boton, i) => (
-                  <a key={i} href={boton.url} target="_blank" rel="noopener noreferrer">
-                    <button>{boton.texto}</button>
-                  </a>
-                ))}
-              </div>
-            ))}
-        </div>
-       <div className="tendencias-container">
-  {pages.layout
-    .filter(block => block.blockType === 'Tendencias')
-    .flatMap(block => block.bloques)
-    .map((bloque, i) => (
-      <div key={i} className="tendencia-card">
-        <img src={bloque.file.url} alt={bloque.value} />
-        <div className="tendencia-card-content">
-          <h5>{bloque.date}</h5>
-          <h2>{bloque.Title}</h2>
-          <p>{bloque.value}</p>
-          <a href={bloque.url} target="_blank" rel="noopener noreferrer">Ver más</a>
-        </div>
-      </div>
-    ))}
-</div>
 
-
-
+        <div>
+          <Tendencias pages={payloadPages} />
+        </div>
 
       </div>
 
@@ -565,7 +557,25 @@ export function Pages() {
                   backgroundRepeat: 'no-repeat',
                   minHeight: '100vh',
                 }}>
-                <div className='formulario'>
+
+                <div className='Info'>
+                  {pages.layout
+                    .filter((b): b is FormularioBlock => b.blockType === 'Formulario')
+                    .map((block, idx) => (
+                      <div className="formulario" key={block.id || idx}>
+                        <h2>{block.titulo}</h2>
+                        <p>{block.contenido}</p>
+
+                        <div className="logos">
+                          {Array.isArray(block.logos) && block.logos.map((img, i) => (
+                            <img key={i} src={img.url} />
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+
+                <div className='form'>
                 </div>
               </section>
             )
@@ -576,3 +586,6 @@ export function Pages() {
     </div>
   )
 }
+
+
+

@@ -361,6 +361,28 @@ export interface Page {
             blockName?: string | null;
             blockType: 'Tendencias';
           }
+        | {
+            titulo?: string | null;
+            contenido?: string | null;
+            logos?:
+              | {
+                  imagen: string | Media;
+                  url: string;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'Formulario';
+          }
+        | {
+            name: string;
+            email: string;
+            message: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contact-form';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -695,6 +717,30 @@ export interface PagesSelect<T extends boolean = true> {
                     url?: T;
                     id?: T;
                   };
+              id?: T;
+              blockName?: T;
+            };
+        Formulario?:
+          | T
+          | {
+              titulo?: T;
+              contenido?: T;
+              logos?:
+                | T
+                | {
+                    imagen?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'contact-form'?:
+          | T
+          | {
+              name?: T;
+              email?: T;
+              message?: T;
               id?: T;
               blockName?: T;
             };

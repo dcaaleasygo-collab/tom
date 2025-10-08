@@ -237,9 +237,67 @@ export const Pages: CollectionConfig = {
               ],
             },
           ],
-        }
+        },
 
-      ],
-    },
-  ],
-}
+        // ======== Formulario ========
+        {
+          slug: 'Formulario',
+          fields: [
+            {
+              name: 'titulo',
+              type: 'text',
+            },
+            {
+              name: 'contenido',
+              type: 'text',
+            },
+            {
+              name: 'logos',
+              type: 'array',
+
+              fields: [
+                {
+                  name: 'imagen',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+                {
+                  name: 'url',
+                  type: 'text',
+                  required: true
+                }
+              ],
+            },
+          ],
+        },
+        {
+          slug: 'contact-form',
+          labels: {
+            singular: 'Formulario de Contacto',
+            plural: 'Formularios de Contacto',
+          },
+          fields: [
+            {
+              name: 'name',
+              type: 'text',
+              label: 'Nombre',
+              required: true,
+            },
+            {
+              name: 'email',
+              type: 'email',
+              label: 'Correo Electrónico',
+              required: true,
+            },
+            {
+              name: 'message',
+              type: 'textarea',
+              label: 'Mensaje',
+              required: true,
+            },
+          ]
+        }
+      ]
+}]}
+
