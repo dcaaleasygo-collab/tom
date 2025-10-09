@@ -18,10 +18,26 @@ interface TendenciasPayloadBlock {
 interface FormularioBlock {
   id: string
   blockType: 'Formulario'
-  logos: Media[]
+  titulo: string
+  inputs: string
+  boton: string
+  
+}
+
+interface DatosFormularioBlock {
+  id: string
+  blockType: 'Datos_Formulario'
+  titulo_f: string
+  inputs: string
+  boton: string
+  logos: {
+    imagen: Media
+    url: string
+  }[]
   titulo: string
   contenido: string
 }
+
 
 
 interface CardBlock {
@@ -128,7 +144,7 @@ interface BannerSecundarioBlock {
 }
 
 type BodyBlock = TextBlock | GifBlock | ImageBlock | ImageCenterBlock | RowBlock | ButtonBlock | ModerTextBlock
-  | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock | TendenciasPayloadBlock | FormularioBlock
+  | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock | TendenciasPayloadBlock | DatosFormularioBlock | FormularioBlock
 
 interface ContentHeaderBlock {
   blockType: 'content_header'
@@ -158,7 +174,7 @@ interface ImageSectionBlock {
 }
 
 type LayoutBlock = HeroBlock | ContentHeaderBlock | ContentBodyBlock | ImageSectionBlock | RowBlock | BannerSecundarioBlock | ContentHeader2Block | ServiciosBlock | TendenciasPayloadBlock
-  | FormularioBlock
+  | DatosFormularioBlock | FormularioBlock
 interface Page {
   title: string
   slug: string
@@ -279,7 +295,6 @@ export function Pages() {
 
                               <button key={item.id} type="button" className="boton">
                                 <a href={item.url} className="boton">{item.buttonText}</a>
-
                                 {item.buttonText}
                               </button>
                             )
@@ -555,27 +570,39 @@ export function Pages() {
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                   backgroundRepeat: 'no-repeat',
-                  minHeight: '100vh',
+                  minHeight: '60vh',
                 }}>
 
-                <div className='Info'>
+                <div className='info'>
                   {pages.layout
-                    .filter((b): b is FormularioBlock => b.blockType === 'Formulario')
+                    .filter((b): b is DatosFormularioBlock => b.blockType === 'Datos_Formulario')
                     .map((block, idx) => (
-                      <div className="formulario" key={block.id || idx}>
-                        <h2>{block.titulo}</h2>
+                      <div className="datos" key={block.id || idx}>
+                        <p className='titulo'>{block.titulo}</p>
                         <p>{block.contenido}</p>
+                        {Array.isArray(block.logos) && block.logos.map((logo, i) => (
+                          <a key={i} href={logo.url} target="_blank" rel="noopener noreferrer">
+                            <img src={logo.imagen?.url} alt={logo.imagen?.alt || 'logo'} />
+                          </a>
+                        ))}
 
-                        <div className="logos">
-                          {Array.isArray(block.logos) && block.logos.map((img, i) => (
-                            <img key={i} src={img.url} />
-                          ))}
-                        </div>
                       </div>
                     ))}
                 </div>
-
                 <div className='form'>
+                  {pages.layout
+                    .filter((b): b is FormularioBlock => b.blockType === 'Formulario')
+                    .map((block, idx) => (
+                       <div className="datos" key={block.id || idx}>
+                      <p className='titulo'>{block.titulo}</p>
+                      <input placeholder={block.inputs}></input>
+                      <button key={block.id} type="button" className="boton">
+                                <a href='#' className="boton">{block.boton}</a>
+                                {block.boton}
+                              </button>
+                      </div>
+                    ))}
+
                 </div>
               </section>
             )

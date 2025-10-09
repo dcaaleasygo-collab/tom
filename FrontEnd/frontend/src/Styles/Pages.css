@@ -397,10 +397,41 @@ color: #0e66a3;
   }
 }
 
-
-
-.formulario {
+#formulario {
   position: relative;
   width: 100%;
-  min-height: 63vh;
+  max-height: 60vh;
+}
+
+.info {
+  width: 22%;       
+  margin: 0 auto;
+  
+  transform: translate(-70%, 80%);
+}
+
+
+
+.datos .titulo{
+  font-size: 140%;
+  size-adjust: 10rem;
+}
+
+.datos p{
+  font-size: 90%;
+  size-adjust: 10rem;
+}
+
+.datos img{
+  width: 2.5rem;
+  margin: 0.5rem;
+}
+
+.form{
+  width: 20%;     
+  height: 45vh;
+  margin: 0 auto;
+  transform: translate(48%, -45%);
+  background-color: #fff;
+  border-radius: 2%;
 }

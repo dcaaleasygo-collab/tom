@@ -239,9 +239,9 @@ export const Pages: CollectionConfig = {
           ],
         },
 
-        // ======== Formulario ========
+        // ======== Datos_Formulario ========
         {
-          slug: 'Formulario',
+          slug: 'Datos_Formulario',
           fields: [
             {
               name: 'titulo',
@@ -272,28 +272,30 @@ export const Pages: CollectionConfig = {
           ],
         },
         {
-          slug: 'contact-form',
-          labels: {
-            singular: 'Formulario de Contacto',
-            plural: 'Formularios de Contacto',
-          },
+          slug: 'form',
           fields: [
             {
-              name: 'name',
+              name: 'titulo',
               type: 'text',
-              label: 'Nombre',
+              label: 'titulo',
               required: true,
             },
             {
-              name: 'email',
-              type: 'email',
-              label: 'Correo Electrónico',
-              required: true,
+              name: 'inputs',
+              type: 'array',
+
+              fields: [
+                {
+                  name: 'place holder',
+                  type: 'text',
+                  required: true,
+                }
+              ],
             },
             {
-              name: 'message',
-              type: 'textarea',
-              label: 'Mensaje',
+              name: 'boton',
+              type: 'text',
+              label: 'boton',
               required: true,
             },
           ]

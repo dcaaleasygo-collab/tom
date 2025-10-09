@@ -373,15 +373,20 @@ export interface Page {
               | null;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'Formulario';
+            blockType: 'Datos_Formulario';
           }
         | {
-            name: string;
-            email: string;
-            message: string;
+            titulo: string;
+            inputs?:
+              | {
+                  'place holder': string;
+                  id?: string | null;
+                }[]
+              | null;
+            boton: string;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'contact-form';
+            blockType: 'form';
           }
       )[]
     | null;
@@ -720,7 +725,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        Formulario?:
+        Datos_Formulario?:
           | T
           | {
               titulo?: T;
@@ -735,12 +740,17 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        'contact-form'?:
+        form?:
           | T
           | {
-              name?: T;
-              email?: T;
-              message?: T;
+              titulo?: T;
+              inputs?:
+                | T
+                | {
+                    'place holder'?: T;
+                    id?: T;
+                  };
+              boton?: T;
               id?: T;
               blockName?: T;
             };

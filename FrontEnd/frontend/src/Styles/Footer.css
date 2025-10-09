@@ -1,7 +1,7 @@
 .footer-container {
-  background-color: #000455;
+  background-color: #141757;
   color: #fff;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   text-align: center;
   position: relative;
   bottom: 0;
@@ -9,9 +9,10 @@
 
 
 .footer-brand img {
-  max-height: 40px;
+  max-height: 30px;
   width: auto;
   margin: 0 auto;  
+  margin-top: 1rem;
   display: block;
 }
 
