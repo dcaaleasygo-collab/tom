@@ -17,12 +17,12 @@ interface TendenciasPayloadBlock {
 
 interface FormularioBlock {
   id: string
-  blockType: 'Formulario'
+  blockType: 'form' // usa 'form', no 'Formulario' (en Payload está así)
   titulo: string
-  inputs: string
+  inputs: { 'place holder': string }[]
   boton: string
-  
 }
+
 
 interface DatosFormularioBlock {
   id: string
@@ -591,19 +591,21 @@ export function Pages() {
                 </div>
                 <div className='form'>
                   {pages.layout
-                    .filter((b): b is FormularioBlock => b.blockType === 'Formulario')
+                    .filter((b): b is FormularioBlock => b.blockType === 'form')
                     .map((block, idx) => (
-                       <div className="datos" key={block.id || idx}>
-                      <p className='titulo'>{block.titulo}</p>
-                      <input placeholder={block.inputs}></input>
-                      <button key={block.id} type="button" className="boton">
-                                <a href='#' className="boton">{block.boton}</a>
-                                {block.boton}
-                              </button>
+                      <div className="datos" key={block.id || idx}>
+                        <p className='titulo'>{block.titulo}</p>
+                        {block.inputs?.map((input, i) => (
+                          <input key={i} placeholder={input['place holder']} />
+                        ))}
+                        <button type="button" className="boton">
+                          {block.boton}
+                        </button>
                       </div>
                     ))}
-
                 </div>
+
+
               </section>
             )
           }
